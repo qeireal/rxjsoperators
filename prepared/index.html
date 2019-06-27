@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Препарируем RxJS операторы</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+
+        .slide {
+            padding-top: 50px;
+        }
+
+        .slide tr:not(:last-of-type) > * {
+            background-image: none;
+        }
+
+        .shout.grow {
+            font-size: 90px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>Препарируем RxJS операторы</h1>
+        <p>Галушко Кирилл</p>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2 class="black">Препарируем RxJS операторы</h2>
+        <img class="cover" src="pictures/workingonlaptop.svg" alt="Guy working on laptop">
+        <style>
+            #cover h2 {
+                margin: 30px 0 0;
+                color: black;
+                text-align: center;
+                font-size: 70px;
+            }
+
+            #cover p {
+                margin: 10px 0 0;
+                text-align: center;
+                color: white;
+                font-style: italic;
+                font-size: 20px;
+            }
+
+            #cover p a {
+                color: white;
+            }
+
+            #cover img {
+                height: 100%;
+                top: 70%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="about">
+        <h2>Галушко Кирилл</h2>
+            <div class="companies-logos">
+                <img class="next" src="pictures/andersen.svg" height="100" alt="Andersen logo">
+                <img src="pictures/superhero.svg" height="150"  alt="Superhero">
+                <img class="next" src="pictures/tcs.png" height="100" alt="Tinkoff logo">
+            </div>
+            <ol class="next links">
+                <li><a href="https://t.me/qeireal/">t.me/qeireal</a></li>
+                <li><a href="https://medium.com/@qeireal/">medium.com/@qeireal</a></li>
+                <li><a href="https://github.com/qeireal/">github.com/qeireal</a></li>
+                <li><a href="https://twitter.com/qeireal/">twitter.com/qeireal</a></li>
+            </ol>
+        </ol>
+        <style>
+            .links {
+                text-align: center;
+            }
+
+            .companies-logos {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 25px;
+            }
+
+            .companies-logos img:last-child {
+                margin-top: 15px;
+            }
+
+            #about.slide ol > li::before {
+                content: none;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="picture">
+        <img class="cover" src="pictures/rxjs.png" alt="RxJS Logo">
+    </section>
+
+    <section class="slide">
+        <h2>О чем поговорим</h2>
+        <ol>
+            <li class="next">Что у Subscribable сущностей под капотом?</li>
+            <li class="next">Что внутри у стандартных операторов?</li>
+            <li class="next">Чего не хватает?</li>
+            <li class="next">Как это можно реализовать?</li>
+            <li class="next">И чем можно воспользоваться?</li>
+        </ol>
+    </section>
+
+    <section class="slide" id="rxjs-link">
+        <h2 class="shout shrink">github.com/ReactiveX/rxjs/ <img src="pictures/lookat.svg" height="120" alt="Look at"></h2>
+        <style>
+            #rxjs-link h2 {
+                font-size: 60px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="subscribable">
+        <h2>Subscribable</h2>
+        <img class="next" src="pictures/subscribable.png" alt="Subscribable interface source screen">
+        <img src="pictures/aversion.svg" height="150"  alt="Aversion">
+        <img class="next" src="pictures/unsubscribable.png" alt="Unsubscribable interface source screen">
+        <style>
+            #subscribable img:first-of-type {
+                width: 80%;
+                display: block;
+            }
+
+            #subscribable img:nth-of-type(2) {
+                float: left;
+            }
+            
+            #subscribable img:last-of-type {
+                width: 50%;
+                float: right;
+            }
+        </style>
+    </section>
+
+    <!-- START: About Observer methods -->
+    <section class="slide" id="subscribe">
+        <h2>subscribe()</h2>
+        <img class="" src="pictures/subscribe.png" alt="Subscribe source code">
+        <style>
+            #subscribe img {
+                width: 83%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="lift">
+        <h2>lift()</h2>
+        <img class="" src="pictures/lift.png" alt="Lift source code">
+        <style>
+            #lift img {
+                width: 90%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="pipe">
+        <h2>pipe()</h2>
+        <img src="pictures/pipe.png" alt="Pipe source code">
+        <style>
+            #pipe img {
+                width: 90%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="pipeFromArray">
+        <h2>pipeFromArray()</h2>
+        <img src="pictures/pipeFromArray.png" alt="pipeFromArray source code">
+        <style>
+            #pipeFromArray img {
+                width: 100%;
+            }
+        </style>
+    </section>
+    <!-- END: About Observer methods -->
+
+    <section class="slide" id="operators">
+        <h2 class="shout shrink">Операторы</h2>
+        <img src="pictures/man.svg" height="180" alt="Man"></h2>
+        <style>
+            #operators img {
+                margin-left: 40%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="chalkboard">
+        <img class="cover" src="pictures/chalkboard.jpg" alt="A Serious man movie shot with chalkboard">
+        <style>
+            #chalkboard h2 {
+                color: white;
+            }
+
+            #chalkboard img {
+                width: 100%;
+            }
+        </style>
+    </section>
+
+    <!-- START: About take operator -->
+    <section class="slide" id="take">
+        <h2>take()</h2>
+            <img class="next screen1" src="pictures/take1.png" alt="Take operator source screen">
+            <img class="next screen2" src="pictures/take2.png" alt="Take operator source screen">
+            <img class="next screen3" src="pictures/take3.png" alt="Take operator source screen">
+    
+            <style>
+                #take .screen1 {
+                    width: 80%;
+                    position: absolute;
+                }
+                #take .screen2 {
+                    width: 81%;
+                    position: absolute;
+                    bottom: 10px;
+                    left: 92px;
+                }
+                #take .screen3 {
+                    height: 92%;
+                    position: absolute;
+                    top: 5px;
+                    left: 202px;
+                }
+            </style>
+        </section>
+    <!-- END: About take operator -->
+
+    <section class="slide" id="wtf">
+        <h2>Теперь, когда мы разобрались...</h2>
+        <img class="next cover" src="pictures/wtf.jpeg" alt="Girl with WTF-face">
+        <style>
+            #wtf img {
+                height: 60%;
+                top: 60%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Ctrl+C Ctrl+V</h2>
+        <ul>
+            <li class="next">tap(() => this.changeDetectorRef.markForCheck())</li>
+            <li class="next">filter(value => !!value)</li>
+            <li class="next">tap(() => this.changeDetectorRef.detectChanges())</li>
+            <li class="next">tap(value => console.log('Professional debug mode. Value: ', value)</li>
+
+            <div class="higher-block">
+                <li class="next rotate20">tap(() => this.changeDetectorRef.markForCheck())</li>
+                <li class="next rotate-20">tap(() => this.changeDetectorRef.detectChanges())</li>
+                <li class="next rotate35">filter(value => !!value)</li>
+                <li class="next rotate-10">tap(value => console.log('Professional debug mode. Value: ', value)</li>
+            </div>
+            
+            <div class="lower-block">
+                <li class="next rotate20">tap(() => this.changeDetectorRef.markForCheck())</li>
+                <li class="next rotate-20">tap(() => this.changeDetectorRef.detectChanges())</li>
+                <li class="next rotate35">filter(value => !!value)</li>
+                <li class="next rotate-10">tap(value => console.log('Professional debug mode. Value: ', value)</li>
+            </div>
+        </ul>
+        <img class="next cover explosion" src="pictures/explosion.gif" alt="Explosion animation">
+        <img class="next cover explosion" src="pictures/explosion.gif" alt="Second explosion animation for skip preventing">
+
+        <style>
+            .higher-block {
+                position: absolute;
+                top: 100px;
+            }
+
+            .lower-block {
+                position: absolute;
+                top: 300px;
+            }
+
+            .rotate20 {
+                transform: rotate(20deg);
+            }
+            .rotate-20 {
+                transform: rotate(-20deg);
+            }
+            .rotate35 {
+                transform: rotate(35deg);
+            }
+            .rotate-10 {
+                transform: rotate(-10deg);
+            }
+
+            .explosion {
+                width: 100%;
+                height: 100%;
+                z-index: 10
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <img class="cover" src="pictures/know_that_feel.png" alt="We all know that feel meme">
+    </section>
+
+    <section class="slide">
+        <h2 class="shout grow">
+            Кастомный оператор<br>
+            Часть 1: Создание
+        </h2>
+    </section>
+
+    <section class="slide" id="operator-rules">
+        <h2>Правила создания</h2>
+
+        <ul>
+            <li class="next">Операторы должны всегда возвращать Observable</li>
+            <li class="next">Оператор должнен иметь подписку на исходный Observable внутри возвращаемого</li>
+            <li class="next">Обрабатывайте исключения</li>
+            <li class="next">Не допускайте утечки памяти</li>
+            <img class="next shout grow" src="pictures/banned-circle.png" alt="Red crossed circle">
+        </ul>
+
+        <style>
+            #operator-rules img {
+                height: 550px;
+                width: 550px;
+                margin: 0 20%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="tf-operator">
+        <h2>truthyFilter()</h2>
+        <img src="pictures/truthyFilter.png" alt="Truthy filter operator source code">
+        <style>
+            #tf-operator img {
+                width: 100%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="tf-operator">
+        <h2>truthyFilter()</h2>
+        <img src="pictures/truthyFilter2.png" alt="Truthy filter operator source code">
+    </section>
+
+    <section class="slide">
+        <h2>Типы возвращаемых значений</h2>
+        <blockquote>
+            <p><b>MonoTypeOperatorFunction</b> - тип не меняется.</p> 
+        </blockquote>
+        <blockquote>
+            <p><b>OperatorFunction</b> - тип меняется.</p>
+        </blockquote>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout grow">
+            Кастомный оператор<br>
+            Часть 2: Использование
+        </h2>
+    </section>
+    
+    <section class="slide" id="tf-uses">
+        <h2>Использование</h2>
+        <img src="pictures/truthyFilter.gif" alt="Truthy filter illustration">
+        <img src="pictures/truthyFilterUse.png" alt="Truthy filter operator Using">
+        <style>
+            #tf-uses img{
+                width: 100%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout grow">
+            Кастомный оператор<br>
+            Часть 3: Тестирование
+        </h2>
+    </section>
+
+    <section class="slide" id="tf-test">
+        <h2>Тестирование</h2>
+        <img src="pictures/test.png" alt="Test file">
+        <style>
+            #tf-test img{
+                width: 90%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="tf-marbles-test">
+        <h2>Marbles тестирование</h2>
+        <img src="pictures/test2.png" alt="Marbles test file">
+        <style>
+            #tf-marbles-test img{
+                width: 100%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="cdr-operator">
+        <h2>cdrChecking()</h2>
+        <img src="pictures/cdrChecking.png" alt="cdrChecking operator source code">
+        <style>
+            #cdr-operator img {
+                width: 100%;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="log-operator">
+        <h2>consoleLog()</h2>
+        <img src="pictures/consoleLog.png" alt="ConsoleLog operator source code">
+        <img src="pictures/console.png" alt="Result of consolelog">
+        <style>
+            #log-operator img:first-of-type {
+                width: 85%;
+            }
+
+            #log-operator img:last-of-type{
+                width: 15%;
+                position: absolute;
+                bottom: 10px;
+                right: 100px;
+                box-shadow: 1px 1px 1px 1px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="lodash">
+        <h2>Преобразование lodash в rxjs операторы</h2>
+        <img src="pictures/lodash.png" alt="Operator from Lodash untility source code">
+        <style>
+            #lodash img {
+                width: 90%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout grow">
+            Готовые решения
+        </h2>
+        <img src="pictures/excitement.svg" height="200"  alt="Excitement">
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://github.com/cartant/rxjs-etc/">"rxjs-etc" Nicholas Jamieson </a></h2>
+
+        <ul>
+            <li>✅ RxJS Core team maintainer</li>
+            <li>✅ Observables и операторы, которые не попали в rxjs</li>
+            <li>✅ Или попадут (например, endWith)</li>
+            <li>⛔ Много узконаправленных операторов</li>
+        </ul>
+    </section>
+    <section class="slide">
+        <h2><a href="https://github.com/NetanelBasal/ngx-take-until-destroy/">"ngx-take-until-destroy" Netanel Basal</a></h2>
+
+        <ul>
+            <li>✅ "Guy that you obviously know" maintainer</li>
+            <li>✅ Простота</li>
+            <li>️️⛔ Нужно всегда инициализировать ngOnDestroy</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <img class="cover" src="pictures/takeUntilDestroy.png" alt="takeUntilDestroy usage">
+    </section>
+
+
+    <ul>
+            <li class="next"></li>
+        </ul>
+
+    <section class="slide" id="picture">
+        <img class="cover" src="pictures/rxjs.png" alt="RxJS Logo">
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shrink">Q&A</h2>
+    </section>
+
+    <footer class="badge">
+        <a href="https://github.com/shower/shower">GitHub</a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.min.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
